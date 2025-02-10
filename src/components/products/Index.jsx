@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { request } from '../../api/Index'
 import { PRODUCT_COLORS } from '../../static/Index'
 import { FaCheck } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
 
 const Products = () => {
 
@@ -9,6 +10,8 @@ const Products = () => {
     const [products, setProducts] = useState([])
     const [error, setError] = useState(null)
     const [loading, setLoading] = useState(false)
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         const fetchProducts = async () =>{
@@ -37,8 +40,8 @@ const Products = () => {
              {
                 products?.map(product => (
                     <div key={product.id}>
-                        <div className='w-full h-[300px] p-6 max-lg:p-2'>
-                            <img src={product.image} alt="" className='h-full w-full object-contain' />
+                        <div className='w-full h-[300px] p-6 max-lg:p-2 overflow-hidden group'>
+                            <img onClick={() => navigate(`/product/${product.id}`)} src={product.image} alt="" className='h-full w-full object-contain group-hover:scale-105 duration-300 cursor-pointer ' />
                         </div>
                         <div className='pt-[25px] pb-[35px] space-y-2.5 text-center max-lg:py-3 '>
                             <p className='line-clamp-1 text-text-color font-bold tracking-[0.1px] ' title={product.title}>{product.title}</p>

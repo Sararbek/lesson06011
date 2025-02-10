@@ -1,7 +1,7 @@
 import React, { memo, useEffect, useRef, useState } from 'react'
 import { BsTelephone } from "react-icons/bs";
 import { TfiEmail } from "react-icons/tfi";
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { IoIosArrowDown } from "react-icons/io";
 import { FaRegUser } from "react-icons/fa6";
 import { IoSearchOutline } from "react-icons/io5";
@@ -14,6 +14,8 @@ import { useContextValue } from '../../context/Index';
 
 
 const Header = () => {
+
+    const {pathname} = useLocation()
 
     const header = useRef(null)
     const [toggleNavbar, setToggleNavbar] = useState(false)
@@ -38,7 +40,7 @@ const Header = () => {
 
   return (
     <header ref={header} className='max-md:relative'>
-        <div className='pt-[9px] pb-[3px] bg-dark-background-color text-light-text-color max-lg:hidden'>
+        <div className={`pt-[9px] pb-[3px] text-light-text-color max-lg:hidden ${pathname.startsWith('/product') ? 'bg-secondary-color-1' : "bg-dark-background-color"}`}>
             <div className='header__container'>
                 <div className='flex items-center justify-between py-[10px]'>
                     <div className='flex items-center gap-x-2.5 heading__h6'>

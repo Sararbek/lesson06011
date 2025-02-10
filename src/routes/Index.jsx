@@ -9,6 +9,7 @@ import Contact from '../pages/contact/Index'
 import Pages from '../pages/pages/Index'
 import Shop from '../pages/shop/Index'
 import Wishlist from '../pages/wishlist/Index'
+import Details from '../pages/details/Index'
 
 const Router = () => {
   return (
@@ -23,6 +24,7 @@ const Router = () => {
                 <Route path='/pages' element={<Pages/>}/>
                 <Route path='/shop' element={<Shop/>}/>
                 <Route path='/wishlist' element={<Wishlist/>}/>
+                <Route path='/product/:id' element={<Details/>} />
             </Route>
         </Routes>
     </>
