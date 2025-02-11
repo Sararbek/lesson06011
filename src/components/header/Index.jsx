@@ -1,7 +1,7 @@
 import React, { memo, useEffect, useRef, useState } from 'react'
 import { BsTelephone } from "react-icons/bs";
 import { TfiEmail } from "react-icons/tfi";
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Link, Navigate, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { IoIosArrowDown } from "react-icons/io";
 import { FaRegUser } from "react-icons/fa6";
 import { IoSearchOutline } from "react-icons/io5";
@@ -12,14 +12,15 @@ import { FaInstagram, FaYoutube, FaFacebook, FaTwitter } from "react-icons/fa";
 import { HEADER_LINKS } from '../../static/Index';
 import { useContextValue } from '../../context/Index';
 
-
 const Header = () => {
 
+    const {state} = useContextValue()
+
+    const navigate = useNavigate()
     const {pathname} = useLocation()
 
     const header = useRef(null)
     const [toggleNavbar, setToggleNavbar] = useState(false)
-    const {setHeaderHeight} = useContextValue()
     useEffect(() => {
 
         const handleResize = () => {
@@ -34,12 +35,8 @@ const Header = () => {
 
     }, [])
 
-    useEffect(() => {
-        setHeaderHeight(header.current?.offsetHeight)
-    }, [])
-
   return (
-    <header ref={header} className='max-md:relative'>
+    <header ref={header} className='max-md:relative  '>
         <div className={`pt-[9px] pb-[3px] text-light-text-color max-lg:hidden ${pathname.startsWith('/product') ? 'bg-secondary-color-1' : "bg-dark-background-color"}`}>
             <div className='header__container'>
                 <div className='flex items-center justify-between py-[10px]'>
@@ -106,7 +103,7 @@ const Header = () => {
                             <div className='flex items-center gap-6 max-lg:gap-4'>
                                 <button className=' cursor-pointer'><IoSearchOutline className='size-4'/></button>
                                 <button className='flex items-center gap-[5px] cursor-pointer'><BsCart className='size-4'/> <sup>1</sup></button>
-                                <button className='flex items-center gap-[5px] cursor-pointer'><GrFavorite className='size-4'/> <sup>1</sup></button>
+                                <button onClick={() => navigate('/wishlist')} className='flex items-center gap-[5px] cursor-pointer'><GrFavorite className='size-4'/> <sup>{state.wishlist.length}</sup></button>
                                 <button onClick={() => setToggleNavbar(prev => !prev)} className='cursor-pointer'><BiMenuAltRight className='hidden size-6 max-md:block'/></button>
                             </div>
                         </div>

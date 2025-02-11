@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Hero from '../../components/hero/Index'
 import { MAIN_CATEGORY, POSTS } from '../../static/Index'
 import Products from '../../components/products/Index'
@@ -8,8 +8,34 @@ import dateIcon from "../../assets/011.png";
 import lineIcon from "../../assets/012.png";
 
 import { FcNext } from "react-icons/fc";
+import { request } from '../../api/Index'
 
 const Home = () => {
+
+    const [products, setProducts] = useState([])
+    const [error, setError] = useState(null)
+    const [loading, setLoading] = useState(false)
+
+        useEffect(() => {
+            const fetchProducts = async () =>{
+                setLoading(true)
+                try{
+                    const response = await request.get(`/products`, {
+                        params: {
+                            limit: 8
+                        }
+                    })
+                    setProducts([...response.data])
+                }catch(error){
+                    setError(error.message)
+                }finally{
+                    setLoading(false)
+                }
+            }
+    
+            fetchProducts()
+        }, [])
+
   return (
     <>
         <Hero/>
@@ -44,7 +70,7 @@ const Home = () => {
                             Problems trying to resolve the conflict between 
                         </p>
                     </div>
-                    <Products/>
+                    <Products productsData={products}/>
                 </div>
             </div>
         </section>

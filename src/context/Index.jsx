@@ -1,17 +1,12 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useReducer, useState } from "react";
 
 export const Context = createContext(null)
 
-export const ContextProvider = ({children}) => {
+export const ContextProvider = ({children, initialValue, reducer}) => {
 
-    const [headerHeight, setHeaderHeight] = useState(null)
+    const [state, dispatch] = useReducer(reducer, initialValue)
 
-    const value = {
-        headerHeight, 
-        setHeaderHeight
-    }
-
-    return <Context.Provider value={value} >{children}</Context.Provider>
+    return <Context.Provider value={{state, dispatch}} >{children}</Context.Provider>
 }
 
 export const useContextValue = () => useContext(Context)

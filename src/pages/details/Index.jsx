@@ -45,9 +45,9 @@ const Details = () => {
                 <span className='text-secondary-text-color'><GrNext/></span>
                 <p className='text-secondary-text-color text-sm font-semibold leading-[24px] tracking-[0.2px] '>Shop</p>
             </div>
-            <div className='flex items-start gap-[30px]'>
-                <div className='space-y-5'>
-                    <div className='relative w-[506px] h-[450px] bg-white p-6'>
+            <div className='flex items-start gap-[30px] max-lg:flex-col max-lg:max-w-[500px] mx-auto'>
+                <div className='space-y-5 max-lg:w-full'>
+                    <div className='relative min-w-[506px] max-w-[506px] w-full h-[450px] bg-white p-14 max-lg:min-w-auto '>
                         <img src={singleProduct?.image} alt="" className=' w-full h-full object-contain ' />
                         <div className='absolute z-[2px] top-[50%] translate-y-[-50%] flex justify-between w-full left-0 px-4 '>
                             <button><GrPrevious className='w-6 h-11'/></button>
@@ -63,7 +63,7 @@ const Details = () => {
                         </div>
                     </div>
                 </div>
-                <div className='p-6 pt-3 space-y-7'>
+                <div className='p-6 pt-3 space-y-7 max-lg:px-0 '>
                     <div className='space-y-8 pb-7 border-b border-muted-text-color  '>
                         <div className='space-y-5'>
                         <div className='space-y-3'>
